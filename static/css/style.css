@@ -1,0 +1,21 @@
+.single_restaurant {
+    margin-bottom: 10px;
+    border: 1px black solid;
+    overflow: hidden;
+}
+
+#restaurant_info {
+    width: 300px;
+    float: left;
+}
+
+#restaurant_img {
+    width: 150px;
+    float: right;
+    overflow: hidden;
+}
+
+#rating {
+    width: 70px;
+    height: 70px;
+}

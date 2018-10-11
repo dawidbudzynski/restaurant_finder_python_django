@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% block content %}
+    <form action="{% url 'restaurants' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input type="submit" value="Create" class="btn btn-primary btn-lg btn-block">
+    </form>
+    <h1>Selected city: {{ city_name }}</h1>
+    <h2>Top cuisines here:</h2>
+    <ul>
+        {% for cuisine in city_top_cuisines %}
+            <li>{{ cuisine }}</li>
+        {% endfor %}
+    </ul>
+    <h2>Nearby restaurants:</h2>
+    {% for restaurant in all_restaurants_details %}
+        <div class="single_restaurant">
+            <div id="restaurant_info">
+                <h2>{{ restaurant.name }}</h2>
+                <p>Cuisine:{{ restaurant.cuisines }}</p>
+                <p>Address:{{ restaurant.location.address }}</p>
+                <p><a href="{{ restaurant.url }}">See on Zomato</a></p>
+                {% if restaurant.user_rating.aggregate_rating != '0' %}
+                    <div id="rating" style="background-color: #{{ restaurant.user_rating.rating_color }}">
+                        <p>Rating<br>{{ restaurant.user_rating.aggregate_rating }}</p>
+                    </div>
+                {% else %}
+                    <div id="rating" style="background-color: whitesmoke">
+                        <p>Rating: No rating</p>
+                    </div>
+                {% endif %}
+            </div>
+            <div id="restaurant_img">
+                {% if restaurant.featured_image %}
+                    <img class="rest_img" src="{{ restaurant.featured_image }}" alt="No image">
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
