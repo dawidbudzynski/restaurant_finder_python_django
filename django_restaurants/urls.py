@@ -19,6 +19,12 @@ from restaurants import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.RestaurantList.as_view(), name='restaurants'),
-    path('restaurants', views.RestaurantList.as_view(), name='restaurants')
+    path('', views.RestaurantList.as_view(),
+         name='restaurants'),
+    path('restaurants', views.RestaurantList.as_view(),
+         name='restaurants'),
+    path('restaurants/city_found=<city_found>', views.RestaurantList.as_view(),
+         name='restaurant_not_found'),
+    path('restaurant/show_details/<restaurant_id>', views.RestaurantDetails.as_view(),
+         name='restaurant_show_details'),
 ]

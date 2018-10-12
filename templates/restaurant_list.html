@@ -1,41 +1,82 @@
 {% extends "base.html" %}
 {% load bootstrap4 %}
+{% load staticfiles %}
 {% block content %}
-    <form action="{% url 'restaurants' %}" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        <input type="submit" value="Create" class="btn btn-primary btn-lg btn-block">
-    </form>
-    <h1>Your city is: {{ city_name }}</h1>
-    <h2>Top cuisines here are:</h2>
-    <ul>
-        {% for cuisine in city_top_cuisines %}
-            <li>{{ cuisine }}</li>
-        {% endfor %}
-    </ul>
-    <h2>Nearby restaurants:</h2>
-    {% for restaurant in nearby_restaurants %}
-        <div class="single_restaurant">
-            <div id="restaurant_info">
-                <h2>{{ restaurant.restaurant.name }}</h2>
-                <p>Cuisine:{{ restaurant.restaurant.cuisines }}</p>
-                <p>Address:{{ restaurant.restaurant.location.address }}</p>
-                <p><a href="{{ restaurant.restaurant.url }}">See on Zomato</a></p>
-                {% if restaurant.restaurant.user_rating.aggregate_rating != '0' %}
-                    <div id="rating" style="background-color: #{{ restaurant.restaurant.user_rating.rating_color }}">
-                        <p>Rating<br>{{ restaurant.restaurant.user_rating.aggregate_rating }}</p>
-                    </div>
-                {% else %}
-                    <div id="rating" style="background-color: whitesmoke">
-                        <p>Rating: No rating available</p>
-                    </div>
-                {% endif %}
-            </div>
-            <div id="restaurant_img">
-                {% if restaurant.restaurant.featured_image %}
-                    <img class="rest_img" src="{{ restaurant.restaurant.featured_image }}" alt="No image">
-                {% endif %}
+    <div class="city_name">
+        <h1>{{ city_name }}</h1>
+    </div>
+    <p></p>
+    <div class="subtitle">
+        <h2>Top cuisines</h2>
+    </div>
+    <p></p>
+    <div class="row">
+        <div class="col-4">
+            <div class="list-group" id="list-tab" role="tablist">
+                {% for cuisine in city_top_cuisines %}
+                    <a class="list-group-item list-group-item-action" id="list-{{ cuisine.name }}-list"
+                       data-toggle="list"
+                       href="#list-{{ cuisine.name }}" role="tab"
+                       aria-controls="{{ cuisine.name }}">{{ cuisine.name }}</a>
+                {% endfor %}
             </div>
         </div>
-    {% endfor %}
+        <div class="col-8">
+            <div class="tab-content" id="nav-tabContent">
+                {% for cuisine in city_top_cuisines %}
+                    <div class="tab-pane fade" id="list-{{ cuisine.name }}" role="tabpanel"
+                         aria-labelledby="list-{{ cuisine.name }}-list">
+                        <h4 class="cuisine-description">{{ cuisine.description }}</h4>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <p></p>
+    <div class="subtitle">
+        <h2>Nearby restaurants</h2>
+    </div>
+    <p></p>
+    <div class="container-fluid">
+        <div class="row">
+            {% for restaurant in all_restaurants_details %}
+                <div class="col-md-6 d-flex">
+                    <div class="card card_small card-body flex-fill">
+                        <div class="card-image">
+                            {% if restaurant.featured_image %}
+                                <img class="card-img-top" src="{{ restaurant.featured_image }}" alt="Card image cap">
+                            {% else %}
+                                <img class="card-img-top" src="{% static 'img/example.jpg' %}" alt="Card image cap">
+                            {% endif %}
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">{{ restaurant.name }}</h3>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><h5>{{ restaurant.cuisines }}</h5></li>
+                            <li class="list-group-item"><h5>{{ restaurant.location.address }}</h5></li>
+                            <li class="list-group-item"><a href="{{ restaurant.url }}"
+                                                           class="btn btn-info btn-block">See on Zomato</a></li>
+                            <li class="list-group-item"><a
+                                    href='{% url  'restaurant_show_details' restaurant_id=restaurant.id %}'
+                                    class="btn btn-info btn-block">Show details</a></li>
+                        </ul>
+                        <div class="card-body">
+                            {% if restaurant.user_rating.aggregate_rating != '0' %}
+                                <button type="button" class="btn btn-success btn-block"
+                                        style="background-color: #{{ restaurant.user_rating.rating_color }}">
+                                    Rating <span
+                                        class="badge badge-light">{{ restaurant.user_rating.aggregate_rating }}</span>
+                                </button>
+                            {% else %}
+                                <button type="button" class="btn btn-primary">
+                                    Rating <span class="badge badge-light">~</span>
+                                </button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

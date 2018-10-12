@@ -1,41 +1,52 @@
 {% extends "base.html" %}
 {% load bootstrap4 %}
+{% load staticfiles %}
 {% block content %}
-    <form action="{% url 'restaurants' %}" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        <input type="submit" value="Create" class="btn btn-primary btn-lg btn-block">
-    </form>
-    <h1>Selected city: {{ city_name }}</h1>
-    <h2>Top cuisines here:</h2>
-    <ul>
-        {% for cuisine in city_top_cuisines %}
-            <li>{{ cuisine }}</li>
-        {% endfor %}
-    </ul>
-    <h2>Nearby restaurants:</h2>
-    {% for restaurant in all_restaurants_details %}
-        <div class="single_restaurant">
-            <div id="restaurant_info">
-                <h2>{{ restaurant.name }}</h2>
-                <p>Cuisine:{{ restaurant.cuisines }}</p>
-                <p>Address:{{ restaurant.location.address }}</p>
-                <p><a href="{{ restaurant.url }}">See on Zomato</a></p>
-                {% if restaurant.user_rating.aggregate_rating != '0' %}
-                    <div id="rating" style="background-color: #{{ restaurant.user_rating.rating_color }}">
-                        <p>Rating<br>{{ restaurant.user_rating.aggregate_rating }}</p>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 d-flex card-details">
+                <div class="card card-body flex-fill">
+                    <div class="card-image-large">
+                        {% if restaurant.featured_image %}
+                            <img class="card-img-top" src="{{ restaurant.featured_image }}" alt="Card image cap">
+                        {% else %}
+                            <img class="card-img-top" src="{% static 'img/example.jpg' %}" alt="Card image cap">
+                        {% endif %}
                     </div>
-                {% else %}
-                    <div id="rating" style="background-color: whitesmoke">
-                        <p>Rating: No rating</p>
+                    <div class="card-body">
+                        <h3 class="card-title">{{ restaurant.name }}</h3>
                     </div>
-                {% endif %}
-            </div>
-            <div id="restaurant_img">
-                {% if restaurant.featured_image %}
-                    <img class="rest_img" src="{{ restaurant.featured_image }}" alt="No image">
-                {% endif %}
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><h5>{{ restaurant.cuisines }}</h5></li>
+                        <li class="list-group-item"><h5>{{ restaurant.location.address }}</h5></li>
+                        <li class="list-group-item"><a href="{{ restaurant.url }}"
+                                                       class="btn btn-info btn-block">See on Zomato</a></li>
+                    </ul>
+                    <div class="card-body">
+                        {% if restaurant.user_rating.aggregate_rating != '0' %}
+                            <button type="button" class="btn btn-success btn-block"
+                                    style="background-color: #{{ restaurant.user_rating.rating_color }}">
+                                Rating <span
+                                    class="badge badge-light">{{ restaurant.user_rating.aggregate_rating }}</span>
+                            </button>
+                        {% else %}
+                            <button type="button" class="btn btn-primary">
+                                Rating <span class="badge badge-light">~</span>
+                            </button>
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        <iframe width="100%"
+                                height="400"
+                                frameborder="0"
+                                style="border:0"
+                                src="https://www.google.com/maps/embed/v1/place?key={{ api_key }}
+                                &q={{ restaurant.location.latitude }},{{ restaurant.location.longitude }}&zoom=18"
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
             </div>
         </div>
-    {% endfor %}
+    </div>
 {% endblock %}

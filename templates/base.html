@@ -1,20 +1,39 @@
 <!DOCTYPE html>
 {% load staticfiles %}
+{% load bootstrap4 %}
 <html lang="en">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
     <title>Restaurants</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-<div class="container mycontent">
+<div id="wrapperHeader">
+    <div id="header">
+        <img id="header_image" src="{% static 'img/header.jpg' %} " alt="logo"/>
+    </div>
+</div>
+<div class="container my_content">
+    <div class="form">
+        <form action="{% url 'restaurants' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <input type="submit" value="Search for places" class="btn btn-primary btn-lg btn-block">
+        </form>
+        {% if city_found == 'False' %}
+            <p></p>
+            <div class="alert alert-warning" role="alert">
+                City not found. Try again.
+            </div>
+        {% endif %}
+        <p></p>
+    </div>
+
     {% block content %}
     {% endblock %}
 </div>

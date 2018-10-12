@@ -1,21 +1,49 @@
-.single_restaurant {
-    margin-bottom: 10px;
-    border: 1px black solid;
-    overflow: hidden;
+body {
+    background-color: #1a1418;
 }
 
-#restaurant_info {
-    width: 300px;
-    float: left;
+.my_content {
+    margin-top: 50px;
 }
 
-#restaurant_img {
-    width: 150px;
-    float: right;
-    overflow: hidden;
+.city_name, .subtitle {
+    color: white;
 }
 
-#rating {
-    width: 70px;
-    height: 70px;
+.cuisine-description{
+    color: white;
+}
+
+#header_image{
+    width: 100%;
+    margin: 0 auto;
+}
+
+.city_name {
+    text-align: center;
+}
+
+.subtitle {
+    text-align: center;
+}
+
+.card_small {
+    margin: 10px 0 10px 0;
+}
+
+.card-details {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.card-image {
+    height: 300px;
+}
+
+.card-image-large{
+    height: 400px;
+}
+
+.card-img-top {
+    height: 100%;
 }

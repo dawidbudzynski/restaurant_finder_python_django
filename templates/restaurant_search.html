@@ -1,9 +1,0 @@
-{% extends "base.html" %}
-{% load bootstrap4 %}
-{% block content %}
-    <form action="{% url 'restaurants' %}" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        <input type="submit" value="Create" class="btn btn-primary btn-lg btn-block">
-    </form>
-{% endblock %}
