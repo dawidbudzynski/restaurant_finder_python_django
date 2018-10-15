@@ -6,15 +6,36 @@ body {
     margin-top: 50px;
 }
 
+.container-fluid {
+    padding: 0;
+}
+
+.restaurant-details-row {
+    margin: 0;
+}
+
+.list-group-item-action.active {
+    background-color: darkgreen;
+}
+
+.list-group-item.active {
+    border-color: darkgreen
+}
+
+.btn-success {
+    background-color: darkgreen;
+    border-color: darkgreen
+}
+
 .city_name, .subtitle {
     color: white;
 }
 
-.cuisine-description{
+.cuisine-description {
     color: white;
 }
 
-#header_image{
+#header_image {
     width: 100%;
     margin: 0 auto;
 }
@@ -40,7 +61,7 @@ body {
     height: 300px;
 }
 
-.card-image-large{
+.card-image-large {
     height: 400px;
 }
 
