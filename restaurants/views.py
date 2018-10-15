@@ -14,11 +14,11 @@ from .helpers import (add_cuisine_description,
 
 
 class RestaurantList(View):
-    def get(self, request, city_found=True):
+    def get(self, request, city_not_found=False):
         form = GetCityForm()
         ctx = {
             'form': form,
-            'city_found': city_found
+            'city_not_found': city_not_found
         }
         return render(request,
                       template_name='base.html',
@@ -30,7 +30,7 @@ class RestaurantList(View):
             city_name = form.cleaned_data['name']
             city_basic_info = get_city_id(city_name)
             if not city_basic_info:
-                return HttpResponseRedirect(reverse('restaurant_not_found', kwargs={'city_found': False}))
+                return HttpResponseRedirect(reverse('restaurant_not_found', kwargs={'city_not_found': True}))
             city_details = get_city_details(city_basic_info['entity_id'], city_basic_info['entity_type'])
             city_name = city_details['city']
             city_top_cuisines = add_cuisine_description(city_details['top_cuisines'])

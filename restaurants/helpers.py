@@ -1,6 +1,7 @@
 import requests
 
 from .constants import RESTAURANT_API_KEY
+from .dictionary import DESCRIPTION
 
 
 def get_city_id(city_name):
@@ -51,16 +52,10 @@ def get_single_restaurant_details(restaurant_id):
 def add_cuisine_description(cuisines_list):
     cuisines_with_description = []
     for cuisine in cuisines_list:
-        if cuisine == 'Polish':
-            description = "Polish cuisine is rich in meat, especially pork, chicken and beef, winter vegetables, spices, and herbs. It is also characteristic in its use of various kinds of noodles the most notable of which are kluski as well as cereals such as kasha. Generally speaking, Polish cuisine is hearty and heavy in its use of butter, cream and eggs. The traditional dishes are often demanding in preparation."
-        elif cuisine == 'Cafe':
-            description = 'cafe food description'
-        elif cuisine == 'Italian':
-            description = 'Italian food description'
-        elif cuisine == 'Pizza':
-            description = 'Pizza food description'
-        elif cuisine == 'Desserts':
-            description = 'Desserts food description'
+        cuisine_as_string = cuisine.upper().replace(' ', '_')
+        print(cuisine_as_string)
+        if cuisine_as_string in DESCRIPTION.keys():
+            description = DESCRIPTION[cuisine_as_string]
         else:
             description = 'No food description found'
         cuisines_with_description.append({'name': cuisine, 'description': description})

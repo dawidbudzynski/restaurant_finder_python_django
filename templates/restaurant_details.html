@@ -3,7 +3,7 @@
 {% load staticfiles %}
 {% block content %}
     <div class="container-fluid">
-        <div class="row">
+        <div class="row restaurant-details-row">
             <div class="col-md-12 d-flex card-details">
                 <div class="card card-body flex-fill">
                     <div class="card-image-large">
@@ -20,7 +20,7 @@
                         <li class="list-group-item"><h5>{{ restaurant.cuisines }}</h5></li>
                         <li class="list-group-item"><h5>{{ restaurant.location.address }}</h5></li>
                         <li class="list-group-item"><a href="{{ restaurant.url }}"
-                                                       class="btn btn-info btn-block">See on Zomato</a></li>
+                                                       class="btn btn-success btn-block">See on Zomato</a></li>
                     </ul>
                     <div class="card-body">
                         {% if restaurant.user_rating.aggregate_rating != '0' %}
@@ -30,7 +30,7 @@
                                     class="badge badge-light">{{ restaurant.user_rating.aggregate_rating }}</span>
                             </button>
                         {% else %}
-                            <button type="button" class="btn btn-primary">
+                            <button type="button" class="btn btn-success">
                                 Rating <span class="badge badge-light">~</span>
                             </button>
                         {% endif %}

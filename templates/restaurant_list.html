@@ -5,6 +5,9 @@
     <div class="city_name">
         <h1>{{ city_name }}</h1>
     </div>
+    <div id="map_wrapper">
+        <div id="map_canvas" class="mapping"></div>
+    </div>
     <p></p>
     <div class="subtitle">
         <h2>Top cuisines</h2>
@@ -14,18 +17,18 @@
         <div class="col-4">
             <div class="list-group" id="list-tab" role="tablist">
                 {% for cuisine in city_top_cuisines %}
-                    <a class="list-group-item list-group-item-action" id="list-{{ cuisine.name }}-list"
+                    <a class="list-group-item list-group-item-action" id="list-{{ cuisine.name|cut:" " }}-list"
                        data-toggle="list"
-                       href="#list-{{ cuisine.name }}" role="tab"
-                       aria-controls="{{ cuisine.name }}">{{ cuisine.name }}</a>
+                       href="#list-{{ cuisine.name|cut:" " }}" role="tab"
+                       aria-controls="{{ cuisine.name|cut:" " }}">{{ cuisine.name }}</a>
                 {% endfor %}
             </div>
         </div>
         <div class="col-8">
             <div class="tab-content" id="nav-tabContent">
                 {% for cuisine in city_top_cuisines %}
-                    <div class="tab-pane fade" id="list-{{ cuisine.name }}" role="tabpanel"
-                         aria-labelledby="list-{{ cuisine.name }}-list">
+                    <div class="tab-pane fade" id="list-{{ cuisine.name|cut:" " }}" role="tabpanel"
+                         aria-labelledby="list-{{ cuisine.name|cut:" " }}-list">
                         <h4 class="cuisine-description">{{ cuisine.description }}</h4>
                     </div>
                 {% endfor %}
@@ -34,7 +37,7 @@
     </div>
     <p></p>
     <div class="subtitle">
-        <h2>Nearby restaurants</h2>
+        <h2>Best rated restaurants</h2>
     </div>
     <p></p>
     <div class="container-fluid">
@@ -56,10 +59,10 @@
                             <li class="list-group-item"><h5>{{ restaurant.cuisines }}</h5></li>
                             <li class="list-group-item"><h5>{{ restaurant.location.address }}</h5></li>
                             <li class="list-group-item"><a href="{{ restaurant.url }}"
-                                                           class="btn btn-info btn-block">See on Zomato</a></li>
+                                                           class="btn btn-success btn-block">See on Zomato</a></li>
                             <li class="list-group-item"><a
-                                    href='{% url  'restaurant_show_details' restaurant_id=restaurant.id %}'
-                                    class="btn btn-info btn-block">Show details</a></li>
+                                    href='{% url 'restaurant_details' restaurant_id=restaurant.id %}'
+                                    class="btn btn-success btn-block">Show details</a></li>
                         </ul>
                         <div class="card-body">
                             {% if restaurant.user_rating.aggregate_rating != '0' %}
@@ -69,7 +72,7 @@
                                         class="badge badge-light">{{ restaurant.user_rating.aggregate_rating }}</span>
                                 </button>
                             {% else %}
-                                <button type="button" class="btn btn-primary">
+                                <button type="button" class="btn btn-success btn-block">
                                     Rating <span class="badge badge-light">~</span>
                                 </button>
                             {% endif %}

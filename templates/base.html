@@ -20,12 +20,12 @@
 </div>
 <div class="container my_content">
     <div class="form">
-        <form action="{% url 'restaurants' %}" method="POST" enctype="multipart/form-data">
+        <form action="{% url 'restaurant' %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {% bootstrap_form form %}
-            <input type="submit" value="Search for places" class="btn btn-primary btn-lg btn-block">
+            <input type="submit" value="Search for places" class="btn btn-success btn-lg btn-block">
         </form>
-        {% if city_found == 'False' %}
+        {% if city_not_found == 'True' %}
             <p></p>
             <div class="alert alert-warning" role="alert">
                 City not found. Try again.
