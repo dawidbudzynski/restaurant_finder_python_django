@@ -8,37 +8,51 @@ from django.views import View
 from .constants import GOOGLE_API_KEY
 from .forms import GetCityForm
 from .helpers import (add_cuisine_description,
-                      get_city_id, get_city_details,
-                      get_restaurants_details,
+                      get_coordinates_from_address,
+                      get_location_details_from_coordinates,
                       get_single_restaurant_details)
 
 
 class RestaurantList(View):
-    def get(self, request, city_not_found=False):
+    def get(self, request, city_not_found=False, all_fields_empty=False):
+        """displays form and optional errors"""
         form = GetCityForm()
         ctx = {
             'form': form,
-            'city_not_found': city_not_found
+            'city_not_found': city_not_found,
+            'all_fields_empty': all_fields_empty
         }
         return render(request,
                       template_name='base.html',
                       context=ctx)
 
     def post(self, request):
+        """gets data from form and sends details about location to template"""
         form = GetCityForm(request.POST)
         if form.is_valid():
-            city_name = form.cleaned_data['name']
-            city_basic_info = get_city_id(city_name)
-            if not city_basic_info:
+            """get data from form"""
+            city = form.cleaned_data['city']
+            street = form.cleaned_data['street']
+            number = form.cleaned_data['number']
+            """show error message when all fields are unfilled"""
+            if city == '' and street == '' and number is None:
+                return HttpResponseRedirect(reverse('all_fields_empty', kwargs={'all_fields_empty': True}))
+            """clear form before displaying again"""
+            form = GetCityForm()
+            coordinates = get_coordinates_from_address(number, street, city)
+            """show error message when Google API can't find location"""
+            if not coordinates:
                 return HttpResponseRedirect(reverse('restaurant_not_found', kwargs={'city_not_found': True}))
-            city_details = get_city_details(city_basic_info['entity_id'], city_basic_info['entity_type'])
-            city_name = city_details['city']
-            city_top_cuisines = add_cuisine_description(city_details['top_cuisines'])
-            nearby_restaurants = city_details['nearby_res']
+            """get details about found location and send it to template"""
+            location_details = get_location_details_from_coordinates(coordinates['lon'], coordinates['lat'])
+            """show error message when Zomato API can't find location"""
+            if not location_details:
+                return HttpResponseRedirect(reverse('restaurant_not_found', kwargs={'city_not_found': True}))
+            city_top_cuisines_with_description = \
+                add_cuisine_description(location_details['popularity']['top_cuisines'])
             ctx = {'form': form,
-                   'city_name': city_name,
-                   'city_top_cuisines': city_top_cuisines,
-                   'all_restaurants_details': get_restaurants_details(nearby_restaurants)}
+                   'city_top_cuisines_with_description': city_top_cuisines_with_description,
+                   'location_details': location_details}
             return render(request,
                           template_name='restaurant_list.html',
                           context=ctx)
@@ -46,6 +60,7 @@ class RestaurantList(View):
 
 class RestaurantDetails(View):
     def get(self, request, restaurant_id):
+        """gets restaurant ID and sends details about restaurant to template"""
         form = GetCityForm()
         restaurant_details = get_single_restaurant_details(restaurant_id)
         ctx = {'form': form,

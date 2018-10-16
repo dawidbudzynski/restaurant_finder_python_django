@@ -23,8 +23,10 @@ urlpatterns = [
          name='restaurant'),
     path('restaurant_list', views.RestaurantList.as_view(),
          name='restaurant'),
-    path('restaurant/city_found=<city_not_found>', views.RestaurantList.as_view(),
+    path('restaurant/city_not_found=<city_not_found>', views.RestaurantList.as_view(),
          name='restaurant_not_found'),
+    path('restaurant/all_fields_empty=<all_fields_empty>', views.RestaurantList.as_view(),
+         name='all_fields_empty'),
     path('restaurant/details/<restaurant_id>', views.RestaurantDetails.as_view(),
          name='restaurant_details')
 ]

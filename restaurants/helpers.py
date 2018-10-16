@@ -1,44 +1,30 @@
 import requests
 
-from .constants import RESTAURANT_API_KEY
+from .constants import RESTAURANT_API_KEY, GOOGLE_API_KEY
 from .dictionary import DESCRIPTION
 
 
-def get_city_id(city_name):
-    location_url = "https://developers.zomato.com/api/v2.1/locations?query={}".format(city_name)
+def get_coordinates_from_address(number=None, street=None, city=None):
+    url = "https://maps.googleapis.com/maps/api/geocode/json?address={}+{},+{}&key={}".format(
+        number, street, city, GOOGLE_API_KEY)
+    api_response = requests.get(url)
+    api_result = api_response.json()
+    if api_result['status'] == 'ZERO_RESULTS':
+        return None
+    coordinates = {'lat': api_result['results'][0]['geometry']['location']['lat'],
+                   'lon': api_result['results'][0]['geometry']['location']['lng']}
+    return coordinates
+
+
+def get_location_details_from_coordinates(lon, lat):
+    url = 'https://developers.zomato.com/api/v2.1/geocode?lat={}&lon={}'.format(lat, lon)
     headers = {"User-agent": "curl/7.43.0", "Accept": "application/json",
                "user_key": "{}".format(RESTAURANT_API_KEY)}
-    city_response = requests.get(location_url, headers=headers)
-    city_info = city_response.json()
-    if not city_info['location_suggestions']:
-        return False
-    result = {
-        'entity_id': city_info['location_suggestions'][0]['entity_id'],
-        'entity_type': city_info['location_suggestions'][0]['entity_type']
-    }
-    return result
-
-
-def get_city_details(city_id, city_type):
-    location_url = \
-        "https://developers.zomato.com/api/v2.1/location_details?entity_id={}&entity_type={}".format(
-            city_id, city_type)
-    headers = {"User-agent": "curl/7.43.0", "Accept": "application/json",
-               "user_key": "{}".format(RESTAURANT_API_KEY)}
-    city_response = requests.get(location_url, headers=headers)
-    return city_response.json()
-
-
-def get_restaurants_details(all_restaurants):
-    all_restaurants_details = []
-    for restaurant_id in all_restaurants:
-        location_url = "https://developers.zomato.com/api/v2.1/restaurant?res_id={}".format(restaurant_id)
-        headers = {"User-agent": "curl/7.43.0", "Accept": "application/json",
-                   "user_key": "{}".format(RESTAURANT_API_KEY)}
-        details_response = requests.get(location_url, headers=headers)
-        restaurant_details_single = details_response.json()
-        all_restaurants_details.append(restaurant_details_single)
-    return all_restaurants_details
+    api_response = requests.get(url, headers=headers)
+    location_details = api_response.json()
+    if location_details.get('status') == 'Bad Request':
+        return None
+    return location_details
 
 
 def get_single_restaurant_details(restaurant_id):
@@ -46,17 +32,17 @@ def get_single_restaurant_details(restaurant_id):
     headers = {"User-agent": "curl/7.43.0", "Accept": "application/json",
                "user_key": "{}".format(RESTAURANT_API_KEY)}
     details_response = requests.get(location_url, headers=headers)
-    return details_response.json()
+    restaurant_details = details_response.json()
+    return restaurant_details
 
 
 def add_cuisine_description(cuisines_list):
     cuisines_with_description = []
     for cuisine in cuisines_list:
         cuisine_as_string = cuisine.upper().replace(' ', '_')
-        print(cuisine_as_string)
         if cuisine_as_string in DESCRIPTION.keys():
             description = DESCRIPTION[cuisine_as_string]
         else:
-            description = 'No food description found'
+            description = 'No description found'
         cuisines_with_description.append({'name': cuisine, 'description': description})
     return cuisines_with_description

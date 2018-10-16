@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 {% load staticfiles %}
-{% load bootstrap4 %}
 <html lang="en">
 <head>
     <!-- Required meta tags -->
@@ -9,7 +8,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <title>Restaurants</title>
+    <title>Restaurant finder</title>
+    <link rel="icon" type="image/png" href="{% static 'img/icon.png' %}"/>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
@@ -22,15 +22,28 @@
     <div class="form">
         <form action="{% url 'restaurant' %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            {% bootstrap_form form %}
-            <input type="submit" value="Search for places" class="btn btn-success btn-lg btn-block">
+            <div class="row">
+                {% for field in form %}
+                    <div class="col col-md-4">
+                        {{ field.label_tag }}{{ field }}
+                    </div>
+                {% endfor %}
+            </div>
+            <p></p>
+            <input type="submit" value="Search for nearby restaurants" class="btn btn-success btn-lg btn-block">
         </form>
         {% if city_not_found == 'True' %}
             <p></p>
             <div class="alert alert-warning" role="alert">
-                City not found. Try again.
+                Location not found. Try again.
+            </div>
+        {% elif all_fields_empty == 'True' %}
+            <p></p>
+            <div class="alert alert-warning" role="alert">
+                All fields are empty. Fill at least one field to search.
             </div>
         {% endif %}
+
         <p></p>
     </div>
 
