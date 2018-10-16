@@ -1,0 +1,5 @@
+[settings]
+restaurant_api_key = 'YOUR SECRET KEY'
+google_api_key = 'YOUR GOOGLE API KEY'
+secret_key = 'YOUR ZOMATO SECRET KEY'
+DEBUG = True
