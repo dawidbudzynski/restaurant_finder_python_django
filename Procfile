@@ -1,0 +1,1 @@
+web: gunicorn restaurant_finder_python_django.wsgi
