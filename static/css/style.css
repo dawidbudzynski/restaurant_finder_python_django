@@ -27,8 +27,9 @@ body {
     border-color: darkgreen
 }
 
-.city_name, .subtitle {
+.city_name, .subtitle, .district {
     color: white;
+    text-align: center;
 }
 
 .cuisine-description {
@@ -38,10 +39,6 @@ body {
 #header_image {
     width: 100%;
     margin: 0 auto;
-}
-
-.city_name {
-    text-align: center;
 }
 
 .subtitle {
