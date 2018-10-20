@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.views import View
 
-from .constants import GOOGLE_API_KEY
+from .constants import GOOGLE_API_KEY_EMBEDDED
 from .forms import GetCityForm
 from .helpers import (add_cuisine_description,
                       get_coordinates_from_address,
@@ -64,7 +64,7 @@ class RestaurantDetails(View):
         restaurant_details = get_single_restaurant_details(restaurant_id)
         ctx = {'form': form,
                'restaurant': restaurant_details,
-               'api_key': GOOGLE_API_KEY}
+               'api_key': GOOGLE_API_KEY_EMBEDDED}
         return render(request,
                       template_name='restaurant_details.html',
                       context=ctx)
