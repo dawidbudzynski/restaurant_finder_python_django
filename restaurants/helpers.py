@@ -4,9 +4,9 @@ from .constants import RESTAURANT_API_KEY, GOOGLE_API_KEY
 from .dictionary import DESCRIPTION
 
 
-def get_coordinates_from_address(number=None, street=None, city=None):
-    url = "https://maps.googleapis.com/maps/api/geocode/json?address={}+{},+{}&key={}".format(
-        number, street, city, GOOGLE_API_KEY)
+def get_coordinates_from_address(street=None, city=None):
+    url = "https://maps.googleapis.com/maps/api/geocode/json?address={},+{}&key={}".format(
+        street, city, GOOGLE_API_KEY)
     api_response = requests.get(url)
     api_result = api_response.json()
     if api_result['status'] == 'ZERO_RESULTS':

@@ -33,13 +33,12 @@ class RestaurantList(View):
             """get data from form"""
             city = form.cleaned_data['city']
             street = form.cleaned_data['street']
-            number = form.cleaned_data['number']
             """show error message when all fields are unfilled"""
-            if city == '' and street == '' and number is None:
+            if city == '' and street == '':
                 return HttpResponseRedirect(reverse('all_fields_empty', kwargs={'all_fields_empty': True}))
             """clear form before displaying again"""
             form = GetCityForm()
-            coordinates = get_coordinates_from_address(number, street, city)
+            coordinates = get_coordinates_from_address(street, city)
             """show error message when Google API can't find location"""
             if not coordinates:
                 return HttpResponseRedirect(reverse('restaurant_not_found', kwargs={'city_not_found': True}))

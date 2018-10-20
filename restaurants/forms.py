@@ -4,7 +4,6 @@ from django.forms import (Form, CharField, IntegerField)
 class GetCityForm(Form):
     city = CharField(max_length=64, required=True)
     street = CharField(max_length=64, required=True)
-    number = IntegerField(required=False)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -12,5 +11,3 @@ class GetCityForm(Form):
         self.fields['city'].widget.attrs.update({'placeholder': 'City', 'class': "form-control"})
         self.fields['street'].label = ''
         self.fields['street'].widget.attrs.update({'placeholder': 'Street', 'class': "form-control"})
-        self.fields['number'].label = ''
-        self.fields['number'].widget.attrs.update({'placeholder': 'Number', 'class': "form-control"})
