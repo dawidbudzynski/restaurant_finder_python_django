@@ -16,8 +16,16 @@
                         <h3 class="card-title">{{ restaurant.name }}</h3>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><h5>{{ restaurant.cuisines }}</h5></li>
-                        <li class="list-group-item"><h5>{{ restaurant.location.address }}</h5></li>
+                        <li class="list-group-item"><h5>Cuisines: {{ restaurant.cuisines }}</h5></li>
+                        <li class="list-group-item"><h5>Address: {{ restaurant.location.address }}</h5></li>
+                        {% if restaurant.average_cost_for_two != 0 %}
+                            <li class="list-group-item"><h5>
+                                Average cost for two:
+                                {{ restaurant.average_cost_for_two }}{{ restaurant.currency }}</h5></li>
+                        {% endif %}
+                        {% if restaurant.phone_numbers %}
+                            <li class="list-group-item"><h5>Phone number: {{ restaurant.phone_numbers }}</h5></li>
+                        {% endif %}
                         <li class="list-group-item"><a href="{{ restaurant.url }}"
                                                        class="btn btn-success btn-block">See on Zomato</a></li>
                     </ul>
