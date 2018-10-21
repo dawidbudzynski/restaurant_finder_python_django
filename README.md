@@ -16,15 +16,16 @@ Then taking coordinates application displays information about nearby restaurant
 * Bootstrap
 
 ## Setup
-Rename settings.ini.example to settings.ini and fill required fields. 
+To run this project:
+1. Rename settings.ini.example to settings.ini and fill required fields. 
 
-To run this project, install required libraries using pip:
+2. install required libraries using pip:
 
 ```
 $ pip install -r requirements.txt
 ```
 
-To run your local server use command: 
+3. To run your local server use command: 
 ```
 $ python manage.py runserver
 ```
