@@ -16,7 +16,7 @@ Then taking coordinates application displays information about nearby restaurant
 * Bootstrap
 
 ## Setup
-Rename settings.ini.example to settings.ini and generate your API keys
+Rename settings.ini.example to settings.ini and fill required fields. 
 
 To run this project, install required libraries using pip:
 
