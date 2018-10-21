@@ -19,7 +19,7 @@ Then taking coordinates application displays information about nearby restaurant
 To run this project:
 1. Rename settings.ini.example to settings.ini and fill required fields. 
 
-2. install required libraries using pip:
+2. Install required libraries using pip:
 
 ```
 $ pip install -r requirements.txt
