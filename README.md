@@ -13,22 +13,23 @@ Then taking coordinates application displays information about nearby restaurant
 * Python 3
 * Django 2.0
 * REST API
-* Bootstrap
+* Bootstrap 4
 
 ## Setup
 To run this project:
 1. Rename settings.ini.example to settings.ini and fill required fields. 
-
 2. Install required libraries using pip:
-
-```
-$ pip install -r requirements.txt
-```
-
-3. To run your local server use command: 
-```
-$ python manage.py runserver
-```
+    ```
+    $ pip install -r requirements.txt
+    ```
+3. Apply migrations: 
+    ```
+    $ python manage.py migrate
+    ```
+4. To run your local server use command: 
+    ```
+    $ python manage.py runserver
+    ```
 
 ## Demo
 ## https://restaurantfinderdjango.herokuapp.com
