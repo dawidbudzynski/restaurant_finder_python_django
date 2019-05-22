@@ -6,7 +6,8 @@ from django.utils.translation import ugettext_lazy as _
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = config('SECRET_KEY', default=False, cast=str)
+
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = []
@@ -55,6 +56,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'django_restaurants.wsgi.application'
 
 WORK_ON_TRAVIS_DATABASE = 'TRAVIS' in os.environ
+WORK_ON_POSTGRE_SQL = False
 if WORK_ON_TRAVIS_DATABASE:
     DATABASES = {
         'default': {
@@ -62,6 +64,17 @@ if WORK_ON_TRAVIS_DATABASE:
             'NAME': 'travis_db',
             'USER': 'postgres',
             'PASSWORD': '',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
+    }
+elif WORK_ON_POSTGRE_SQL:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'restaurant_db',
+            'USER': 'postgres',
+            'PASSWORD': 'postgres',
             'HOST': 'localhost',
             'PORT': '',
         }
