@@ -167,3 +167,5 @@ fabric.properties
 .idea/httpRequests
 
 settings.ini
+staticfiles
+.idea
