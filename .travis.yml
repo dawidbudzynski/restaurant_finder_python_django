@@ -25,6 +25,3 @@ script:
   - python manage.py migrate
   - python manage.py collectstatic
   - coverage run --source='.' manage.py test
-
-after_success:
-  coverage report
