@@ -20,7 +20,7 @@
 </div>
 <div class="container my_content">
     <div class="form">
-        <form action="{% url 'restaurant' %}" method="POST" enctype="multipart/form-data">
+        <form action="{% url 'restaurant-list' %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="row">
                 {% for field in form %}
@@ -32,21 +32,17 @@
             <p></p>
             <input type="submit" value="Search for nearby restaurants" class="btn btn-success btn-lg btn-block">
         </form>
-        {% if city_not_found == 'True' %}
-            <p></p>
-            <div class="alert alert-warning" role="alert">
-                Location not found. Try again.
-            </div>
-        {% elif all_fields_empty == 'True' %}
-            <p></p>
-            <div class="alert alert-warning" role="alert">
-                All fields are empty. Fill at least one field to search.
-            </div>
+        {% if messages %}
+            {% for message in messages %}
+                <div {% if message.level == 20 %}
+                    class="alert alert-primary" {% else %}
+                    class="alert alert-warning" {% endif %} role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
         {% endif %}
-
         <p></p>
     </div>
-
     {% block content %}
     {% endblock %}
 </div>

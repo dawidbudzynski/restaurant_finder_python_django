@@ -54,7 +54,8 @@
                                 <img class="card-img-top" src="{{ restaurant.restaurant.featured_image }}"
                                      alt="Card image cap">
                             {% else %}
-                                <img class="card-img-top" src="{% static 'img/example.jpg' %}" alt="Card image cap">
+                                <img class="card-img-top" src="{% static 'img/example.jpg' %}"
+                                     alt="Card image cap">
                             {% endif %}
                         </div>
                         <div class="card-body">
@@ -63,18 +64,22 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item"><h5>{{ restaurant.restaurant.cuisines }}</h5></li>
                             <li class="list-group-item"><h5>{{ restaurant.restaurant.location.address }}</h5></li>
-                            <li class="list-group-item"><a href="{{ restaurant.restaurant.url }}"
-                                                           class="btn btn-success btn-block">See on Zomato</a></li>
-                            <li class="list-group-item"><a
-                                    href='{% url 'restaurant_details' restaurant_id=restaurant.restaurant.id %}'
-                                    class="btn btn-success btn-block">Show details</a></li>
+                            <li class="list-group-item">
+                                <a href="{{ restaurant.restaurant.url }}"
+                                   class="btn btn-success btn-block">See on Zomato</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href='{% url 'restaurant-details' restaurant_id=restaurant.restaurant.id %}'
+                                   class="btn btn-success btn-block">Show details</a>
+                            </li>
                         </ul>
                         <div class="card-body">
                             {% if restaurant.user_rating.aggregate_rating != '0' %}
                                 <button type="button" class="btn btn-success btn-block"
-                                        style="background-color: #{{ restaurant.user_rating.rating_color }}">
-                                    Rating <span
-                                        class="badge badge-light">{{ restaurant.restaurant.user_rating.aggregate_rating }}</span>
+                                        style="background-color: #{{ restaurant.user_rating.rating_color }}">Rating
+                                    <span class="badge badge-light">
+                                        {{ restaurant.restaurant.user_rating.aggregate_rating }}
+                                    </span>
                                 </button>
                             {% else %}
                                 <button type="button" class="btn btn-success btn-block">

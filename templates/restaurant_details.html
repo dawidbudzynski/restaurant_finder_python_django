@@ -21,20 +21,22 @@
                         {% if restaurant.average_cost_for_two != 0 %}
                             <li class="list-group-item"><h5>
                                 Average cost for two:
-                                {{ restaurant.average_cost_for_two }}{{ restaurant.currency }}</h5></li>
+                                {{ restaurant.average_cost_for_two }}{{ restaurant.currency }}</h5>
+                            </li>
                         {% endif %}
                         {% if restaurant.phone_numbers %}
                             <li class="list-group-item"><h5>Phone number: {{ restaurant.phone_numbers }}</h5></li>
                         {% endif %}
-                        <li class="list-group-item"><a href="{{ restaurant.url }}"
-                                                       class="btn btn-success btn-block">See on Zomato</a></li>
+                        <li class="list-group-item">
+                            <a href="{{ restaurant.url }}"
+                               class="btn btn-success btn-block">See on Zomato</a>
+                        </li>
                     </ul>
                     <div class="card-body">
                         {% if restaurant.user_rating.aggregate_rating != '0' %}
                             <button type="button" class="btn btn-success btn-block"
-                                    style="background-color: #{{ restaurant.user_rating.rating_color }}">
-                                Rating <span
-                                    class="badge badge-light">{{ restaurant.user_rating.aggregate_rating }}</span>
+                                    style="background-color: #{{ restaurant.user_rating.rating_color }}">Rating
+                                <span class="badge badge-light">{{ restaurant.user_rating.aggregate_rating }}</span>
                             </button>
                         {% else %}
                             <button type="button" class="btn btn-success">
