@@ -3,6 +3,8 @@ language: python
 python:
   - "3.7"
 
+services: postgresql
+
 env:
   - DJANGO=2.1.2
 
@@ -14,7 +16,10 @@ before_install:
 install:
   - pip install -r requirements.txt
   - pip install django==$DJANGO --quiet
+  - pip install psycopg2 --quiet
 
+before_script:
+  - psql -c "CREATE DATABASE travis_db;" -U postgres
 script:
   - python manage.py makemigrations
   - python manage.py migrate
