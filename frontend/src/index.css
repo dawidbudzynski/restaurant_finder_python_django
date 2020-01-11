@@ -1,13 +1,67 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    background-color: #1a1418;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.my_content {
+    margin-top: 50px;
+}
+
+.container-fluid {
+    padding: 0;
+}
+
+.restaurant-details-row {
+    margin: 0;
+}
+
+.list-group-item-action.active {
+    background-color: darkgreen;
+}
+
+.list-group-item.active {
+    border-color: darkgreen
+}
+
+.btn-success {
+    background-color: darkgreen;
+    border-color: darkgreen
+}
+
+.city_name, .subtitle, .district {
+    color: white;
+    text-align: center;
+}
+
+.cuisine-description {
+    color: white;
+}
+
+#header_image {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.subtitle {
+    text-align: center;
+}
+
+.card_small {
+    margin: 10px 0 10px 0;
+}
+
+.card-details {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.card-image {
+    height: 300px;
+}
+
+.card-image-large {
+    height: 400px;
+}
+
+.card-img-top {
+    height: 100%;
 }
