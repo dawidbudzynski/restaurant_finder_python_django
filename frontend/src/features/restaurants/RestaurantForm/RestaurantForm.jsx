@@ -44,7 +44,8 @@ class RestaurantForm extends Component {
       prestine
     } = this.props;
     return (
-      <Grid>
+      <Grid centered>
+        <Grid.Column width={14} id="form">
           <Segment>
             <Header sub color="teal" content="Restaurant Address" />
             <Form
@@ -80,6 +81,7 @@ class RestaurantForm extends Component {
               </Button>
             </Form>
           </Segment>
+        </Grid.Column>
       </Grid>
     );
   }

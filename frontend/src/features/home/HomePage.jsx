@@ -1,6 +1,7 @@
 import React, {Component} from "react";
-import {Grid, Image} from "semantic-ui-react";
+import {Grid} from "semantic-ui-react";
 import RestaurantForm from '../restaurants/RestaurantForm/RestaurantForm'
+import HeaderImage from "./HeaderImage";
 
 
 class HomePage extends Component {
@@ -8,15 +9,10 @@ class HomePage extends Component {
   render() {
     return (
       <Grid>
-        <div id="wrapperHeader">
-          <div id="header">
-            <Image
-              id="header_image"
-              src={"/assets/header.jpg"}
-              alt="logo"/>
-          </div>
-        </div>
-        <RestaurantForm/>
+        <Grid.Column width={16}>
+          <HeaderImage/>
+          <RestaurantForm/>
+        </Grid.Column>
       </Grid>
     );
   }
