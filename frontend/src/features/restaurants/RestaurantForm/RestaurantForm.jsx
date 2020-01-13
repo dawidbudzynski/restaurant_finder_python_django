@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
-import {
-  combineValidators,
-  isRequired,
-} from "revalidate";
+import { combineValidators, isRequired } from "revalidate";
 import { Segment, Form, Button, Grid, Header } from "semantic-ui-react";
 import { searchRestaurants } from "../eventActions";
 import TextInput from "../../../app/common/form/TextInput";
@@ -22,17 +19,18 @@ const actions = {
 
 const validate = combineValidators({
   city: isRequired({ message: "The field is required" }),
-  street: isRequired({ message: "The field is required" }),
+  street: isRequired({ message: "The field is required" })
 });
 
 class RestaurantForm extends Component {
-  state = { ...this.props.event };
+  state = { ...this.props.asia };
 
   onFormSubmit = values => {
-      const restaurantData = {
-        ...values
-      };
-      this.props.searchRestaurants(restaurantData);
+    const restaurantData = {
+      ...values
+    };
+    this.props.searchRestaurants(restaurantData);
+    this.props.history.push("/list");
   };
 
   render() {
@@ -52,12 +50,8 @@ class RestaurantForm extends Component {
               onSubmit={this.props.handleSubmit(this.onFormSubmit)}
               autoComplete="off"
             >
+              <Field name="city" component={TextInput} placeholder={"City"} />
               <Field
-                name="city"
-                component={TextInput}
-                placeholder={"City"}
-              />
-               <Field
                 name="street"
                 component={TextInput}
                 placeholder={"Street"}

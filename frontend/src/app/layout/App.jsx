@@ -1,16 +1,33 @@
-import React, {Component, Fragment} from "react";
+import React, { Component, Fragment } from "react";
+import { Route, Switch, withRouter } from "react-router-dom";
+import { Container } from "semantic-ui-react";
 
-import HomePage from "../../features/home/HomePage";
-
+import HeaderImage from "../../features/home/HeaderImage";
+import RestaurantList from "../../features/restaurants/RestaurantList/RestaurantList";
+import RestaurantForm from "../../features/restaurants/RestaurantForm/RestaurantForm";
 
 class App extends Component {
   render() {
     return (
       <Fragment>
-        <HomePage/>
+        <HeaderImage />
+        <Route exact path="/" component={RestaurantForm} />
+        <Route
+          exact
+          path="/(.+)"
+          render={() => (
+            <Fragment>
+              <Container className="main">
+                <Switch key={this.props.location.key}>
+                  <Route path="/list" component={RestaurantList} />
+                </Switch>
+              </Container>
+            </Fragment>
+          )}
+        />
       </Fragment>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
