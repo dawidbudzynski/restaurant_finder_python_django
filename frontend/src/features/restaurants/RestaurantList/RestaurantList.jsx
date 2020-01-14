@@ -1,31 +1,27 @@
-import React, { Component } from "react";
-import { Grid } from "semantic-ui-react";
+import React, {Component} from "react";
+import axios from "axios";
+import {Grid} from "semantic-ui-react";
 import RestaurantListItem from "../RestaurantListItem/RestaurantListItem";
 
 class RestaurantList extends Component {
+  state = {
+    restaurants: []
+  };
+
+  componentDidMount() {
+    axios.get(`http://localhost:8000/pl/api/restaurant-list/`).then(res => {
+      const restaurants = res.data;
+      this.setState({restaurants});
+    });
+  }
+
   render() {
-    const exampleData = [
-      {
-        id: "1",
-        name: "Burger King",
-        address: "Long Street"
-      },
-      {
-        id: "2",
-        name: "Good Food",
-        address: "Short Street"
-      },
-      {
-        id: "3",
-        name: "McDonalds",
-        address: "Nice Street"
-      }
-    ];
+    const {restaurants} = this.state;
     return (
       <Grid>
         <Grid.Column width={14}>
-          {exampleData.map(restaurant => (
-            <RestaurantListItem key={restaurant.id} restaurant={restaurant} />
+          {restaurants.map(restaurant => (
+            <RestaurantListItem key={restaurant.id} restaurant={restaurant}/>
           ))}
         </Grid.Column>
       </Grid>

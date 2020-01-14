@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import { Grid, Card, Image } from "semantic-ui-react";
+import React, {Component} from "react";
+import {Card, Grid, Image} from "semantic-ui-react";
 
 class RestaurantListItem extends Component {
   render() {
-    const { restaurant } = this.props;
+    const {restaurant} = this.props;
     return (
       <Grid>
         <Grid.Column>
           <Card>
             <Image
-              src="https://react.semantic-ui.com/images/avatar/large/matthew.png"
+              src={restaurant.featured_image}
               wrapped
               ui={false}
             />
