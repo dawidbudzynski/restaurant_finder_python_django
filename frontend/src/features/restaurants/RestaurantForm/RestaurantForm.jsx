@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
 import { combineValidators, isRequired } from "revalidate";
 import { Segment, Form, Button, Grid, Header } from "semantic-ui-react";
-import { searchRestaurants } from "../eventActions";
+import cuid from "cuid";
+import { saveSearchParams } from "../eventActions";
 import TextInput from "../../../app/common/form/TextInput";
 
 const mapState = (state, ownProps) => {
@@ -14,7 +15,7 @@ const mapState = (state, ownProps) => {
 };
 
 const actions = {
-  searchRestaurants
+  saveSearchParams
 };
 
 const validate = combineValidators({
@@ -26,10 +27,11 @@ class RestaurantForm extends Component {
   state = { ...this.props.asia };
 
   onFormSubmit = values => {
-    const restaurantData = {
-      ...values
-    };
-    this.props.searchRestaurants(restaurantData);
+    const searchParams = {
+        ...values,
+        id: cuid(),
+      };
+    this.props.saveSearchParams(searchParams);
     this.props.history.push("/list");
   };
 

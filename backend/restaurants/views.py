@@ -20,8 +20,8 @@ from .serializers import RestaurantsSerializer
 
 class GetRestaurantListAPIView(views.APIView):
 
-    def get(self, request):
-        coordinates = get_coordinates_from_address('Wołoska', 'Warszawa')
+    def get(self, request, city, street):
+        coordinates = get_coordinates_from_address(city, street)
         location_details = get_location_details_from_coordinates(coordinates)
         nearby_restaurant_list = location_details['nearby_restaurants']
         restaurant_data = []

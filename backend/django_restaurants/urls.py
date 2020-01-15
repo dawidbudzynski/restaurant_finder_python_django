@@ -13,5 +13,6 @@ urlpatterns += i18n_patterns(
          name='restaurant-list'),
     path('restaurant/details/<restaurant_id>', views.RestaurantDetailsView.as_view(),
          name='restaurant-details'),
-    path('api/restaurant-list/', views.GetRestaurantListAPIView.as_view())
+    path('api/restaurant-list/<city>/<street>', views.GetRestaurantListAPIView.as_view(),
+         name='api-restaurant-list')
 )

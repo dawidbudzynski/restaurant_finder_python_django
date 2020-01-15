@@ -1,12 +1,12 @@
 import {createReducer} from "../../app/common/util/reducerUtils";
-import {SEARCH_RESTAURANTS} from "./eventConstants";
+import {SAVE_SEARCH_PARAMS} from "./eventConstants";
 
 const initialState = [];
 
-const searchRestaurants = (state, payload) => {
-  return [...state, payload.restaurant];
+const saveSearchParams = (state, payload) => {
+  return [...state, payload.search_params];
 };
 
 export default createReducer(initialState, {
-  [SEARCH_RESTAURANTS]: searchRestaurants
+  [SAVE_SEARCH_PARAMS]: saveSearchParams
 });

@@ -1,10 +1,10 @@
-import {SEARCH_RESTAURANTS} from "./eventConstants";
+import {SAVE_SEARCH_PARAMS} from "./eventConstants";
 
-export const searchRestaurants = restaurant => {
+export const saveSearchParams = search_params => {
   return {
-    type: SEARCH_RESTAURANTS,
+    type: SAVE_SEARCH_PARAMS,
     payload: {
-      restaurant
+      search_params
     }
   };
 };
