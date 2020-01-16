@@ -3,16 +3,21 @@ import {connect} from "react-redux";
 import axios from "axios";
 import {Grid} from "semantic-ui-react";
 import RestaurantListItem from "../RestaurantListItem/RestaurantListItem";
+import {saveRestaurantList} from "../../../redux/restaurants/restaurantsActions";
 
 const mapState = state => ({
   searchParams: state.searchParams
 });
 
+const actions = {
+  saveRestaurantList
+};
 
 class RestaurantList extends Component {
   state = {
     restaurants: []
   };
+
 
   componentDidMount() {
     const {searchParams} = this.props;
@@ -20,6 +25,7 @@ class RestaurantList extends Component {
       const {city, street} = searchParams[0];
       axios.get(`http://localhost:8000/pl/api/restaurant-list/${city}/${street}`).then(res => {
         const restaurants = res.data;
+        // this.props.saveRestaurantList(restaurants);
         this.setState({restaurants});
       });
     }
@@ -40,4 +46,4 @@ class RestaurantList extends Component {
   }
 }
 
-export default connect(mapState)(RestaurantList);
+export default connect(mapState, actions)(RestaurantList);

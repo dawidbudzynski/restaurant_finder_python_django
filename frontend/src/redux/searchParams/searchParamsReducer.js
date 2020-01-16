@@ -1,12 +1,12 @@
 import {createReducer} from "../../app/common/util/reducerUtils";
-import {SAVE_SEARCH_PARAMS} from "./eventConstants";
+import {SAVE_SEARCH_PARAMS} from "./searchParamsConstants";
 
 const initialState = [];
 
 const saveSearchParams = (state, payload) => {
-  return [...state, payload.search_params];
+  return [...state, payload.searchParams];
 };
 
 export default createReducer(initialState, {
-  [SAVE_SEARCH_PARAMS]: saveSearchParams
+  [SAVE_SEARCH_PARAMS]: saveSearchParams,
 });

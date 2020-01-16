@@ -4,7 +4,7 @@ import { reduxForm, Field } from "redux-form";
 import { combineValidators, isRequired } from "revalidate";
 import { Segment, Form, Button, Grid, Header } from "semantic-ui-react";
 import cuid from "cuid";
-import { saveSearchParams } from "../eventActions";
+import { saveSearchParams } from "../../../redux/searchParams/searchParamsActions";
 import TextInput from "../../../app/common/form/TextInput";
 
 const mapState = (state, ownProps) => {

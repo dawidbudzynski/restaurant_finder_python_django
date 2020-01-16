@@ -21,6 +21,9 @@ class RestaurantListItem extends Component {
               <Card.Description>
                 {restaurant.address}
               </Card.Description>
+              <Card.Description>
+                {restaurant.rating}
+              </Card.Description>
             </Card.Content>
           </Card>
         </Grid.Column>
