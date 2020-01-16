@@ -23,17 +23,26 @@ class GetRestaurantListAPIView(views.APIView):
     def get(self, request, city, street):
         coordinates = get_coordinates_from_address(city, street)
         location_details = get_location_details_from_coordinates(coordinates)
-        nearby_restaurant_list = location_details['nearby_restaurants']
+        restaurant_data = self.prepare_restaurants_data(location_details['nearby_restaurants'])
+        serialized_data = RestaurantsSerializer(restaurant_data, many=True).data
+        return Response(serialized_data)
+
+    @staticmethod
+    def prepare_restaurants_data(raw_restaurant_data):
         restaurant_data = []
-        for restaurant in nearby_restaurant_list:
+        for restaurant in raw_restaurant_data:
             restaurant = restaurant['restaurant']
             restaurant_data.append({
                 'id': restaurant['id'],
                 'name': restaurant['name'],
-                'featured_image': restaurant['featured_image']
+                'cuisines': restaurant['cuisines'],
+                'address': restaurant['location']['address'],
+                'city_district': restaurant['location']['locality'],
+                'featured_image': restaurant['featured_image'],
+                'rating': restaurant['user_rating']['aggregate_rating'],
+                'average_cost_for_two': restaurant['average_cost_for_two']
             })
-        results = RestaurantsSerializer(restaurant_data, many=True).data
-        return Response(results)
+        return restaurant_data
 
 
 class RestaurantListView(View):

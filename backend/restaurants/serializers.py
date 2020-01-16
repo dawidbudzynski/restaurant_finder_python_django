@@ -1,7 +1,12 @@
-from rest_framework import serializers
+from rest_framework.serializers import Serializer, CharField, IntegerField
 
 
-class RestaurantsSerializer(serializers.Serializer):
-    id = serializers.IntegerField()
-    name = serializers.CharField()
-    featured_image = serializers.CharField()
+class RestaurantsSerializer(Serializer):
+    id = IntegerField()
+    name = CharField()
+    cuisines = CharField()
+    address = CharField()
+    city_district = CharField()
+    featured_image = CharField()
+    rating = CharField()
+    average_cost_for_two = CharField()
