@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.utils.translation import ugettext as _
 from django.views import View
-from rest_framework import views
+from rest_framework import status, views
 from rest_framework.response import Response
 
 from .constants import GOOGLE_API_KEY_EMBEDDED
@@ -22,7 +22,15 @@ class GetRestaurantListAPIView(views.APIView):
 
     def get(self, request, city, street):
         coordinates = get_coordinates_from_address(city, street)
+        if not coordinates:
+            """Google Geocoding API could't find location"""
+            content = {'Google Geocoding error': 'Google Geocoding API could\'t find location'}
+            return Response(content, status=status.HTTP_404_NOT_FOUND)
         location_details = get_location_details_from_coordinates(coordinates)
+        if not location_details:
+            """Zomato API could't find information about restaurants"""
+            content = {'Zomato API error': 'Zomato API API could\'t find information about restaurants'}
+            return Response(content, status=status.HTTP_404_NOT_FOUND)
         restaurant_data = self.prepare_restaurants_data(location_details['nearby_restaurants'])
         serialized_data = RestaurantsSerializer(restaurant_data, many=True).data
         return Response(serialized_data)

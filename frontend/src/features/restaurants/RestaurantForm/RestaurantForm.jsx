@@ -8,10 +8,7 @@ import { saveSearchParams } from "../../../redux/searchParams/searchParamsAction
 import TextInput from "../../../app/common/form/TextInput";
 
 const mapState = (state, ownProps) => {
-  let restaurant = {};
-  return {
-    initialValues: restaurant
-  };
+  return {}
 };
 
 const actions = {
@@ -24,7 +21,6 @@ const validate = combineValidators({
 });
 
 class RestaurantForm extends Component {
-  state = { ...this.props.asia };
 
   onFormSubmit = values => {
     const searchParams = {
@@ -37,8 +33,6 @@ class RestaurantForm extends Component {
 
   render() {
     const {
-      history,
-      initialValues,
       invalid,
       submitting,
       prestine
@@ -65,15 +59,8 @@ class RestaurantForm extends Component {
               >
                 Submit
               </Button>
-              <Button
-                onClick={
-                  initialValues.id
-                    ? () => history.push(`/events/${initialValues.id}`)
-                    : () => history.push("/events/")
-                }
-                type="button"
-              >
-                Cancel
+              <Button type="button">
+                Clear
               </Button>
             </Form>
           </Segment>
