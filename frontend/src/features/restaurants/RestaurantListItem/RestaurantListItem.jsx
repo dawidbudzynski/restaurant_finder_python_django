@@ -7,20 +7,22 @@ class RestaurantListItem extends Component {
     return (
       <Grid>
         <Grid.Column>
-          <Card>
+          <Card centered className='restaurantCard'>
             <Image
               src={restaurant.featured_image}
-              wrapped
-              ui={false}
+              className='cardImage'
             />
             <Card.Content>
+
               <Card.Header>{restaurant.name}</Card.Header>
-              <Card.Meta>
-                <span className="date">Joined in 2015</span>
-              </Card.Meta>
               <Card.Description>
+                <span className="date">{restaurant.cuisines}</span>
+              </Card.Description>
+              <Card.Description className='cardDescription'>
                 {restaurant.address}
               </Card.Description>
+            </Card.Content>
+            <Card.Content extra>
               <Card.Description>
                 {restaurant.rating}
               </Card.Description>
