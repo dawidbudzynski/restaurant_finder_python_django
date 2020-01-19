@@ -34,6 +34,6 @@ To run this project:
 ## Demo
 ## https://restaurantfinderdjango.herokuapp.com
 
-![alt text](https://raw.githubusercontent.com/dawidbudzynski/restaurant_finder_python_django/master/examples/example_1.png)
-![alt text](https://raw.githubusercontent.com/dawidbudzynski/restaurant_finder_python_django/master/examples/example_2.png)
-![alt text](https://raw.githubusercontent.com/dawidbudzynski/restaurant_finder_python_django/master/examples/example_3.png)
+![alt text](https://raw.githubusercontent.com/dawidbudzynski/restaurant_finder_python_django/master/backend/examples/example_1.png)
+![alt text](https://raw.githubusercontent.com/dawidbudzynski/restaurant_finder_python_django/master/backend/examples/example_2.png)
+![alt text](https://raw.githubusercontent.com/dawidbudzynski/restaurant_finder_python_django/master/backend/examples/example_3.png)
