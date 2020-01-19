@@ -5,6 +5,7 @@ import { Container } from "semantic-ui-react";
 import HeaderImage from "../../features/home/HeaderImage";
 import RestaurantList from "../../features/restaurants/RestaurantList/RestaurantList";
 import RestaurantForm from "../../features/restaurants/RestaurantForm/RestaurantForm";
+import RestaurantDetails from "../../features/restaurants/RestaurantDetails/RestaurantDetails";
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
               <Container className="main">
                 <Switch key={this.props.location.key}>
                   <Route path="/list" component={RestaurantList} />
+                  <Route path="/restaurant/:id" component={RestaurantDetails} />
                 </Switch>
               </Container>
             </Fragment>

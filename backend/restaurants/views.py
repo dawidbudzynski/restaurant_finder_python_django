@@ -19,6 +19,9 @@ from .serializers import RestaurantsSerializer
 
 
 class GetRestaurantListAPIView(views.APIView):
+    """
+    Returns details about nearby restaurants for React
+    """
 
     def get(self, request, city, street):
         coordinates = get_coordinates_from_address(city, street)
@@ -41,7 +44,7 @@ class GetRestaurantListAPIView(views.APIView):
         for restaurant in raw_restaurant_data:
             restaurant = restaurant['restaurant']
             restaurant_data.append({
-                'id': restaurant['id'],
+                'id': str(restaurant['id']),
                 'name': restaurant['name'],
                 'cuisines': restaurant['cuisines'],
                 'address': restaurant['location']['address'],

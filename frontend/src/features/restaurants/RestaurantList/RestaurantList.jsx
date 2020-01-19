@@ -46,7 +46,7 @@ class RestaurantList extends Component {
         <Grid>
           <Grid.Row>
             {restaurants.map(restaurant => (
-              <Grid.Column key={restaurant.id} width={16} centered>
+              <Grid.Column key={restaurant.id} width={16}>
                 <RestaurantListItem restaurant={restaurant}/>
               </Grid.Column>
             ))}

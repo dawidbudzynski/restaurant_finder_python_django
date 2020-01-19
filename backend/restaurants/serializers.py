@@ -2,7 +2,7 @@ from rest_framework.serializers import Serializer, CharField, IntegerField
 
 
 class RestaurantsSerializer(Serializer):
-    id = IntegerField()
+    id = CharField()
     name = CharField()
     cuisines = CharField()
     address = CharField()
