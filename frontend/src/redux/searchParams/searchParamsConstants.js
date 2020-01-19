@@ -1,0 +1,1 @@
+export const SAVE_SEARCH_PARAMS = 'SAVE_SEARCH_PARAMS';

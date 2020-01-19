@@ -1,0 +1,15 @@
+body {
+    background-color: #1a1418;
+}
+
+#wrapperHeader {
+    padding-bottom: 50px;
+}
+
+.restaurantCard{
+    margin-bottom: 50px !important;
+}
+
+.cardImage {
+    height: 300px;
+}
