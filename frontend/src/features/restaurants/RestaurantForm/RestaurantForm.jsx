@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
 import { combineValidators, isRequired } from "revalidate";
-import { Segment, Form, Button, Grid, Header } from "semantic-ui-react";
+import { Form, Button, Grid } from "semantic-ui-react";
 import cuid from "cuid";
 import { saveSearchParams } from "../../../redux/searchParams/searchParamsActions";
 import TextInput from "../../../app/common/form/TextInput";
 
 const mapState = (state, ownProps) => {
-  return {}
+  return {};
 };
 
 const actions = {
@@ -21,49 +21,44 @@ const validate = combineValidators({
 });
 
 class RestaurantForm extends Component {
-
   onFormSubmit = values => {
     const searchParams = {
-        ...values,
-        id: cuid(),
-      };
+      ...values,
+      id: cuid()
+    };
     this.props.saveSearchParams(searchParams);
     this.props.history.push("/list");
   };
 
   render() {
-    const {
-      invalid,
-      submitting,
-      prestine
-    } = this.props;
+    const { invalid, submitting, prestine } = this.props;
     return (
       <Grid centered>
-        <Grid.Column width={14} id="form">
-          <Segment>
-            <Header sub color="teal" content="Restaurant Address" />
-            <Form
-              onSubmit={this.props.handleSubmit(this.onFormSubmit)}
-              autoComplete="off"
-            >
+        <Grid.Column width={14}>
+          <Form
+            onSubmit={this.props.handleSubmit(this.onFormSubmit)}
+            autoComplete="on"
+          >
+            <Form.Group widths={"equal"}>
               <Field name="city" component={TextInput} placeholder={"City"} />
               <Field
                 name="street"
                 component={TextInput}
                 placeholder={"Street"}
               />
+            </Form.Group>
+            <Button.Group widths={7}>
               <Button
                 disabled={invalid || submitting || prestine}
                 positive
                 type="submit"
               >
-                Submit
+                Search
               </Button>
-              <Button type="button">
-                Clear
-              </Button>
-            </Form>
-          </Segment>
+              <Button.Or />
+              <Button type="button">Clear</Button>
+            </Button.Group>
+          </Form>
         </Grid.Column>
       </Grid>
     );

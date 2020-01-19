@@ -7,7 +7,7 @@ class RestaurantListItem extends Component {
     return (
       <Grid>
         <Grid.Column>
-          <Card centered className='restaurantCard'>
+          <Card fluid centered className='restaurantCard'>
             <Image
               src={restaurant.featured_image}
               className='cardImage'

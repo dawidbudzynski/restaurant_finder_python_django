@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import axios from "axios";
-import {Grid} from "semantic-ui-react";
+import {Grid, Message} from "semantic-ui-react";
 import RestaurantListItem from "../RestaurantListItem/RestaurantListItem";
 import {saveRestaurantList} from "../../../redux/restaurants/restaurantsActions";
 
@@ -42,15 +42,29 @@ class RestaurantList extends Component {
     let restaurants = [];
     if (this.props.restaurants && this.props.restaurants.length > 0) {
       restaurants = this.props.restaurants[0];
+      return (
+        <Grid>
+          <Grid.Row>
+            {restaurants.map(restaurant => (
+              <Grid.Column key={restaurant.id} width={16} centered>
+                <RestaurantListItem restaurant={restaurant}/>
+              </Grid.Column>
+            ))}
+          </Grid.Row>
+        </Grid>
+      );
     }
     return (
-      <Grid centered columns={3}>
+      <Grid>
         <Grid.Row>
-          {restaurants.map(restaurant => (
-            <Grid.Column key={restaurant.id} width={5} centered>
-              <RestaurantListItem restaurant={restaurant}/>
-            </Grid.Column>
-          ))}
+          <Grid.Column>
+            <Message warning size={'large'}>
+              <Message.Header>No restaurants found</Message.Header>
+              <p>
+                Please go back to main page and try again.
+              </p>
+            </Message>
+          </Grid.Column>
         </Grid.Row>
       </Grid>
     );
