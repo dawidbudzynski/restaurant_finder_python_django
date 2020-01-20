@@ -1,4 +1,4 @@
-# Restaurant Finder [![Build Status](https://travis-ci.org/dawidbudzynski/restaurant_finder_python_django.svg?branch=master)](https://travis-ci.org/dawidbudzynski/restaurant_finder_python_django)
+# Restaurant Finder [![Build Status](https://travis-ci.org/dawidbudzynski/restaurant_finder_python_django.svg?branch=v1.0)](https://travis-ci.org/dawidbudzynski/restaurant_finder_python_django)
 
 ## General info
 A web application made using Python 3, Django 2, Bootstrap and REST API.
@@ -34,6 +34,6 @@ To run this project:
 ## Demo
 ## https://restaurantfinderdjango.herokuapp.com
 
-![alt text](https://raw.githubusercontent.com/dawidbudzynski/restaurant_finder_python_django/master/examples/example_1.png)
-![alt text](https://raw.githubusercontent.com/dawidbudzynski/restaurant_finder_python_django/master/examples/example_2.png)
-![alt text](https://raw.githubusercontent.com/dawidbudzynski/restaurant_finder_python_django/master/examples/example_3.png)
+![alt text](https://raw.githubusercontent.com/dawidbudzynski/restaurant_finder_python_django/master/backend/examples/example_1.png)
+![alt text](https://raw.githubusercontent.com/dawidbudzynski/restaurant_finder_python_django/master/backend/examples/example_2.png)
+![alt text](https://raw.githubusercontent.com/dawidbudzynski/restaurant_finder_python_django/master/backend/examples/example_3.png)
