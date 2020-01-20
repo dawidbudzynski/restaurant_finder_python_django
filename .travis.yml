@@ -10,7 +10,7 @@ env:
 
 before_install:
   - export DJANGO_SETTINGS_MODULE=django_restaurants.settings
-  - export PYTHONPATH=$HOME/builds/dawidbudzynski/restaurant_finder_python_django
+  - export PYTHONPATH=$HOME/builds/dawidbudzynski/restaurant_finder_python_django/backend
   - export PIP_USE_MIRRORS=true
 
 install:
@@ -25,7 +25,7 @@ script:
   - python manage.py makemigrations
   - python manage.py migrate
   - python manage.py collectstatic
-  - coverage run --source='.' manage.py test
+  - coverage run --source='/backend' manage.py test
 
 after_success:
   coverage report -m
