@@ -14,11 +14,12 @@ before_install:
   - export PIP_USE_MIRRORS=true
 
 install:
-  - pip install -r requirements.txt
+  - pip install -r backend/requirements.txt
   - pip install django==$DJANGO --quiet
   - pip install psycopg2 --quiet
 
 before_script:
+  - cd backend
   - psql -c "CREATE DATABASE travis_db;" -U postgres
 
 script:
