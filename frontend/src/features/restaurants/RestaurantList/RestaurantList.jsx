@@ -41,7 +41,7 @@ class RestaurantList extends Component {
   render() {
     let restaurants = [];
     if (this.props.restaurants && this.props.restaurants.length > 0) {
-      restaurants = this.props.restaurants[0];
+      restaurants = this.props.restaurants;
       return (
         <Grid>
           <Grid.Row>

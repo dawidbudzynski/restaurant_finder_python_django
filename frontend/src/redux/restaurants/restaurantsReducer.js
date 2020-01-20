@@ -4,7 +4,7 @@ import {SAVE_RESTAURANT_LIST} from "./restaurantsConstants";
 const initialState = [];
 
 const saveRestaurantList = (state, payload) => {
-  return [...state, payload.restaurantList];
+  return [...state, ...payload.restaurantList];
 };
 
 export default createReducer(initialState, {

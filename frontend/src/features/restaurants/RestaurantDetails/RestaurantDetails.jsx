@@ -5,41 +5,41 @@ import { connect } from "react-redux";
 const mapState = (state, ownProps) => {
   const restaurantId = ownProps.match.params.id;
 
-  let restaurant = {};
+  let selectedRestaurant = {};
 
   if (restaurantId && state.restaurants.length > 0) {
-    restaurant = state.restaurants[0].filter(
-      restauranta => restauranta.id === restaurantId
+    selectedRestaurant = state.restaurants.filter(
+      restaurant => restaurant.id === restaurantId
     )[0];
   }
 
   return {
-    restaurant
+    selectedRestaurant
   };
 };
 
 class RestaurantDetails extends Component {
   render() {
-    const { restaurant } = this.props;
-    if (restaurant && restaurant.id) {
+    const { selectedRestaurant } = this.props;
+    if (selectedRestaurant && selectedRestaurant.id) {
       return (
         <Grid>
           <Grid.Row>
             <Grid.Column>
               <Card fluid centered className="restaurantCard">
-                <Image src={restaurant.featured_image} className="cardImage" />
+                <Image src={selectedRestaurant.featured_image} className="cardImage" />
                 <Card.Content>
-                  <Card.Header>{restaurant.name}</Card.Header>
+                  <Card.Header>{selectedRestaurant.name}</Card.Header>
                   <Card.Description>
-                    <span className="date">{restaurant.cuisines}</span>
+                    <span className="date">{selectedRestaurant.cuisines}</span>
                   </Card.Description>
-                  <Card.Description>{restaurant.address}</Card.Description>
+                  <Card.Description>{selectedRestaurant.address}</Card.Description>
                 </Card.Content>
                 <Card.Content extra>
                   <Card.Description>
                     <Label>
                       <Icon name="sort" />
-                      Rating: {restaurant.rating}/5
+                      Rating: {selectedRestaurant.rating}/5
                     </Label>
                   </Card.Description>
                 </Card.Content>
