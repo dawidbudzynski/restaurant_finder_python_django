@@ -30,6 +30,10 @@ class RestaurantForm extends Component {
     this.props.history.push("/list");
   };
 
+  clearForm = () => {
+    this.props.reset();
+  };
+
   render() {
     const { invalid, submitting, prestine } = this.props;
     return (
@@ -56,7 +60,9 @@ class RestaurantForm extends Component {
                 Search
               </Button>
               <Button.Or />
-              <Button type="button">Clear</Button>
+              <Button type="button" onClick={this.clearForm}>
+                Clear
+              </Button>
             </Button.Group>
           </Form>
         </Grid.Column>
