@@ -1,9 +1,9 @@
-import React, {Component} from "react";
-import {connect} from "react-redux";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import axios from "axios";
-import {Grid, Message} from "semantic-ui-react";
+import { Grid, Segment, Dimmer, Loader, Image } from "semantic-ui-react";
 import RestaurantListItem from "../RestaurantListItem/RestaurantListItem";
-import {saveRestaurantList} from "../../../redux/restaurants/restaurantsActions";
+import { saveRestaurantList } from "../../../redux/restaurants/restaurantsActions";
 
 const mapState = state => ({
   searchParams: state.searchParams,
@@ -19,21 +19,22 @@ class RestaurantList extends Component {
     restaurants: []
   };
 
-
   componentDidMount() {
     const searchParams = this.props.searchParams;
     if (searchParams && searchParams.length > 0) {
-      const {city, street} = searchParams[0];
+      const { city, street } = searchParams[0];
       try {
-        axios.get(`http://localhost:8000/pl/api/restaurant-list/${city}/${street}`).then(res => {
-          const response = res.data;
-          if (response && response.length > 0) {
-            this.props.saveRestaurantList(response);
-          }
-        });
+        axios
+          .get(`http://localhost:8000/pl/api/restaurant-list/${city}/${street}`)
+          .then(res => {
+            const response = res.data;
+            if (response && response.length > 0) {
+              this.props.saveRestaurantList(response);
+            }
+          });
       } catch (error) {
         // todo doesn't catch errors
-        console.log(error)
+        console.log(error);
       }
     }
   }
@@ -47,7 +48,7 @@ class RestaurantList extends Component {
           <Grid.Row>
             {restaurants.map(restaurant => (
               <Grid.Column key={restaurant.id} width={16}>
-                <RestaurantListItem restaurant={restaurant}/>
+                <RestaurantListItem restaurant={restaurant} />
               </Grid.Column>
             ))}
           </Grid.Row>
@@ -58,12 +59,12 @@ class RestaurantList extends Component {
       <Grid>
         <Grid.Row>
           <Grid.Column>
-            <Message warning size={'large'}>
-              <Message.Header>No restaurants found</Message.Header>
-              <p>
-                Please go back to main page and try again.
-              </p>
-            </Message>
+            <Segment>
+              <Dimmer active>
+                <Loader indeterminate>Looking for nearby restaurants</Loader>
+              </Dimmer>
+              <Image src="https://react.semantic-ui.com/images/wireframe/short-paragraph.png" />
+            </Segment>
           </Grid.Column>
         </Grid.Row>
       </Grid>
