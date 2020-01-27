@@ -21,13 +21,14 @@ const mapState = (state, ownProps) => {
 class RestaurantDetails extends Component {
   render() {
     const { selectedRestaurant } = this.props;
+    const restaurantImage = selectedRestaurant.featured_image ? selectedRestaurant.featured_image : '/assets/defaultImage.jpg';
     if (selectedRestaurant && selectedRestaurant.id) {
       return (
         <Grid>
           <Grid.Row>
             <Grid.Column>
               <Card fluid centered className="restaurantCard">
-                <Image src={selectedRestaurant.featured_image} className="cardImage" />
+                <Image src={restaurantImage} className="cardImage" />
                 <Card.Content>
                   <Card.Header>{selectedRestaurant.name}</Card.Header>
                   <Card.Description>

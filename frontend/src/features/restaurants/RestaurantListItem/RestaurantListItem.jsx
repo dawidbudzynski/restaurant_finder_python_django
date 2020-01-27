@@ -5,11 +5,13 @@ import { Link } from "react-router-dom";
 class RestaurantListItem extends Component {
   render() {
     const { restaurant } = this.props;
+    const restaurantImage = restaurant.featured_image ? restaurant.featured_image : '/assets/defaultImage.jpg';
+    
     return (
       <Grid>
         <Grid.Column>
           <Card fluid className="restaurantCard">
-            <Image src={restaurant.featured_image} className="cardImage" />
+            <Image src={restaurantImage} className="cardImage" />
             <Card.Content>
               <Card.Header>{restaurant.name}</Card.Header>
               <Card.Description>
