@@ -1,7 +1,7 @@
 # Restaurant Finder [![Build Status](https://travis-ci.org/dawidbudzynski/restaurant_finder_python_django.svg?branch=v1.0)](https://travis-ci.org/dawidbudzynski/restaurant_finder_python_django)
 
 ## General info
-A web application made using Python 3, Django 2, Bootstrap and REST API.
+A web application made using Python 3, Django 2, React, Redux, REST API and Semantic UI.
 Application converts address provided by user to coordinates using Google Geocoding API.
 Then taking coordinates application displays information about nearby restaurants using Zomato API. 
 
@@ -12,24 +12,22 @@ Then taking coordinates application displays information about nearby restaurant
 ## Technologies
 * Python 3
 * Django 2.0
+* React
+* Redux
 * REST API
-* Bootstrap 4
+* Semantic UI
 
 ## Setup
 To run this project:
 1. Rename settings.ini.example to settings.ini and fill required fields. 
-2. Install required libraries using pip:
+2. Start docker containers with command:
     ```
-    $ pip install -r requirements.txt
+    $ docker-compose up
     ```
-3. Apply migrations: 
-    ```
-    $ python manage.py migrate
-    ```
-4. To run your local server use command: 
-    ```
-    $ python manage.py runserver
-    ```
+ 3. Application is available on port 3000
+     ```
+     http://localhost:3000/
+     ```
 
 ## Demo
 ## https://restaurantfinderdjango.herokuapp.com
