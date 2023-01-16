@@ -32,7 +32,7 @@ Pygments==2.4.0
 python-decouple==3.1
 pytz==2018.5
 ratelim==0.1.6
-requests==2.19.1
+requests==2.20.0
 six==1.11.0
 traitlets==4.3.2
 urllib3==1.23
